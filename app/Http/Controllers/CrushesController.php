@@ -42,6 +42,13 @@ class CrushesController extends Controller
      */
     public function setAndSaveCrushData($crush, $request)
     {
+    	$request->validate([
+    		'first_name'	=> 	'required',
+    		'last_name'		=>	'required',
+    		'fb_profile_link'=>	'required|Url',
+    		'contact_number'=>	'required|digits:11'
+		]);
+
         $crush->first_name = $request->first_name;
         $crush->last_name = $request->last_name;
         $crush->fb_profile_link = $request->fb_profile_link;
@@ -49,8 +56,7 @@ class CrushesController extends Controller
         $crush->created_at 	= Carbon::now();
         $crush->updated_at	= Carbon::now();
         $crush->save();
-
-    }
+	}
 
     /**
      * Display the specified resource.
